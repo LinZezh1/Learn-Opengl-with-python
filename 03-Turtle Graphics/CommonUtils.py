@@ -1,6 +1,5 @@
-import math
 import numpy as np
-
+import math
 
 def map_value(current_min, current_max, new_min, new_max, value):
     current_range = current_max - current_min

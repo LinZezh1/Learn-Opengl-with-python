@@ -1,9 +1,8 @@
-import numpy as np
 import pygame
 from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
-# from Utils import *
+from CommonUtils import *
 
 pygame.init()
 
@@ -34,6 +33,10 @@ def line_to(x, y):
    current_position = (x, y)
    glEnd()
 
+def move_to():
+    global current_position
+    current_position = (x, y)
+
 def reset_turtle():
     global current_position
     global direction
@@ -42,13 +45,19 @@ def reset_turtle():
 
 def draw_turtle():
     forwad()
+    rotate(90)
     forwad()
+    rotate(90)
     forwad()
 
 def forwad():
     new_x = current_position[0] + direction[0] * draw_length
     new_y = current_position[1] + direction[1] * draw_length
     line_to(new_x, new_y)
+
+def rotate(angle):
+    global direction
+    direction = z_rotation(direction, math.radians(angle))
 
 init_ortho()
 done = False
