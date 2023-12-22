@@ -1,1 +1,1 @@
-Use python study opengl
+Learning Opengl using Python
