@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from Cube import *
+from LoadMesh import *
 
 pygame.init()
 
@@ -14,8 +14,9 @@ drawing_color = (1, 1, 1, 1)
 
 screen = pygame.display.set_mode((screen_width, screen_height), DOUBLEBUF | OPENGL)
 pygame.display.set_caption('OpenGL in Python')
-cube = Cube(GL_LINE_LOOP)
+mesh = LoadMesh("04-Engine/teapot.obj", GL_LINE_LOOP)
 
+eye = [0, 2, 5]
 
 def initialise():
     glClearColor(background_color[0], background_color[1], background_color[2], background_color[3])
@@ -24,22 +25,20 @@ def initialise():
     # projection
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    gluPerspective(60, (screen_width / screen_height), 0.1, 100.0)
+    gluPerspective(60, (screen_width / screen_height), 0.1, 500.0)
 
     # modelview
     glMatrixMode(GL_MODELVIEW)
-    glTranslate(0, 0, -5)
     glLoadIdentity()
     glViewport(0, 0, screen.get_width(), screen.get_height())
     glEnable(GL_DEPTH_TEST)
-    glTranslate(0, 0, -2)
+    gluLookAt(eye[0], eye[1], eye[2], 0, 0, 0, 0, 1, 0)
 
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glRotatef(1, 10, 0, 1)
     glPushMatrix()
-    cube.draw()
+    mesh.draw()
     glPopMatrix()
 
 
@@ -49,6 +48,13 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        eye[2] += 1
+    if keys[pygame.K_RIGHT]:
+        eye[2] -= 1
+
     display()
     pygame.display.flip()
     pygame.time.wait(100);
