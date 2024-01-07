@@ -11,7 +11,7 @@ class PyOGLApp():
         self.screen_width = screen_width
         self.screen_height = screen_height
         pygame.init()
-        screen = pygame.display.set_mode((screen_width, screen_height), DOUBLEBUF | OPENGL)
+        self.screen = pygame.display.set_mode((screen_width, screen_height), DOUBLEBUF | OPENGL)
         pygame.display.set_caption('OpenGL in Python')
         self.camera = Camera()
 
@@ -55,16 +55,16 @@ class PyOGLApp():
         glLineWidth(1)
         glColor(1, 1, 1)
 
-        def initialise(self):
+    def initialise(self):
             pass
 
-        def display(self):
+    def display(self):
             pass
 
-        def camera_init(self):
+    def camera_init(self):
             pass
 
-        def mainloop(self):
+    def mainloop(self):
             done = False
             self.initialise()
             pygame.event.set_grab(True)
