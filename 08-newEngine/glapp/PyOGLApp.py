@@ -14,6 +14,7 @@ class PyOGLApp():
         self.screen = pygame.display.set_mode((screen_width, screen_height), DOUBLEBUF | OPENGL)
         pygame.display.set_caption('OpenGL in Python')
         self.camera = Camera()
+        self.program_id = None
 
     def draw_world_axes(self):
         glLineWidth(4)
