@@ -1,5 +1,5 @@
 from pygame.locals import *
-from .camera import *
+from camera import *
 import os
 from OpenGL.GL import *
 from OpenGL.GLU import *
