@@ -2,8 +2,9 @@ from OpenGL.GL import *
 
 def compile_shader(shader_type, shader_source):
     shader_id = glCreateShader(shader_type)
+    glShaderSource(shader_id, shader_source)
     glCompileShader(shader_id)
-    compile_success = glGetShaderInfoLog(shader_id, GL_COMPILE_STATUS)
+    compile_success = glGetShaderiv(shader_id, GL_COMPILE_STATUS)
     if not compile_success:
         error_message = glGetShaderInfoLog(shader_id)
         glDeleteShader(shader_id)
@@ -20,7 +21,7 @@ def create_program(vertex_shader_code, fragment_shader_code):
     glLinkProgram(program_id)
     link_success = glGetProgramiv(program_id, GL_LINK_STATUS)
     if not link_success:
-        info = glGetProgramInfoLog(program_id)
+        info = glGetShaderInfoLog(program_id)
         raise RuntimeError(info)
     glDeleteShader(vertex_shader_id)
     glDeleteShader(fragment_shader_id)
